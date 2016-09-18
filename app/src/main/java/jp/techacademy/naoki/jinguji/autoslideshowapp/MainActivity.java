@@ -72,6 +72,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 null, // フィルタ用パラメータ
                 null // ソート (null ソートなし)
         );
+        if(cursor.moveToFirst()) {
+            int fieldIndex = cursor.getColumnIndex(MediaStore.Images.Media._ID);
+            Long id = cursor.getLong(fieldIndex);
+            Uri imageUri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id);
+
+            ImageView imageView = (ImageView) findViewById(R.id.slideView);
+            imageView.setImageURI(imageUri);
+        }
     }
     @Override
     public void onClick(View v) {
